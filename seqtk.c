@@ -1925,7 +1925,13 @@ static int usage()
 	return 1;
 }
 
-int main(int argc, char *argv[])
+#ifdef AS_LIBRARY
+#define MAIN seqtk_main
+#else 
+#define MAIN main 
+#endif
+
+int MAIN(int argc, char *argv[])
 {
 	if (argc == 1) return usage();
 	if (strcmp(argv[1], "comp") == 0) return stk_comp(argc-1, argv+1);
